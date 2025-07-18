@@ -28,7 +28,7 @@ jobs:
             - name: Build Docker image
               id: set-version
               run: |
-                  IMAGE_NAME="dhinojosa/gitops-todo"
+                  IMAGE_NAME="sliderco/gitops-todo"
                   VERSION=$(date +'%Y.%m.%d.%H%M%S') # Version based on timestamp
                   docker build -t $IMAGE_NAME:$VERSION .
                   echo "::set-output name=version::$VERSION"
@@ -36,7 +36,7 @@ jobs:
             # Step 4: Push the Docker image
             - name: Push Docker image to Docker Hub
               run: |
-                  IMAGE_NAME="dhinojosa/gitops-todo"
+                  IMAGE_NAME="sliderco/gitops-todo"
                   docker push $IMAGE_NAME:${{ steps.set-version.outputs.version }}
 
     update-config:
