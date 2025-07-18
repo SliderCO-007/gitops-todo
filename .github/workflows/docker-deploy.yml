@@ -48,7 +48,7 @@ jobs:
             - name: Checkout gitops-todo-config repository
               uses: actions/checkout@v3
               with:
-                  repository: dhinojosa/gitops-todo-config
+                  repository: SliderCO-007/gitops-todo-config
                   token: ${{ secrets.GH_TOKEN }}
                   ref: main
 
@@ -66,7 +66,7 @@ jobs:
                     echo "Error: Staging patch file does not exist."
                     exit 1
                   fi
-                  sed -i "s|image: .*|image: dhinojosa/gitops-todo:${{ needs.build-and-push.outputs.version }}|g" $PATCH_FILE
+                  sed -i "s|image: .*|image: SliderCO-007/gitops-todo:${{ needs.build-and-push.outputs.version }}|g" $PATCH_FILE
 
             # Step 4: Debug View patch file after changes
             - name: Debug View patch file after changes
@@ -83,7 +83,7 @@ jobs:
                   git config user.email "actions@github.com"
                   git add overlays/staging/patch-deployment.yaml
                   git commit -m "Update image version to ${{ needs.build-and-push.outputs.version }} for staging" || echo "No changes to commit"
-                  git push https://x-access-token:${TOKEN}@github.com/dhinojosa/gitops-todo-config.git HEAD:main
+                  git push https://x-access-token:${TOKEN}@github.com/SliderCO-007/gitops-todo-config.git HEAD:main
 
     notify-success:
         needs: update-config
